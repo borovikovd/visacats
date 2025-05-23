@@ -1,0 +1,330 @@
+:root {
+    --bg-dark: #0f1419;
+    --bg-light: #1a1f2e;
+    --text-primary: #ffffff;
+    --text-secondary: #8b92a8;
+    --accent-red: #ff6b6b;
+    --accent-blue: #4dabf7;
+    --track-bg: #2a3441;
+    --track-border: #3a4451;
+    --rainbow-colors: #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--bg-light);
+    border-bottom: 2px solid var(--track-border);
+}
+
+h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, var(--rainbow-colors));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow-shift 3s ease-in-out infinite;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+}
+
+main {
+    flex: 1;
+    padding: 2rem 1rem;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.race-track {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.lane {
+    position: relative;
+    background: var(--bg-light);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 2px solid var(--track-border);
+}
+
+.petition-info {
+    margin-bottom: 1.5rem;
+}
+
+.petition-link {
+    display: inline-block;
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    color: var(--text-primary);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.petition-link:hover {
+    text-decoration: underline;
+}
+
+.wobble-hover:hover {
+    animation: wobble 0.5s ease-in-out;
+}
+
+@keyframes wobble {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+}
+
+.signature-count {
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+    color: var(--text-secondary);
+}
+
+.count-number {
+    font-weight: bold;
+    color: var(--text-primary);
+    font-size: 1.2em;
+}
+
+.track-line {
+    height: 80px;
+    background: var(--track-bg);
+    border: 2px solid var(--track-border);
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.nyan-wrapper {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    width: 60px;
+    height: 80px;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.rainbow-trail {
+    position: absolute;
+    left: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+    height: 40px;
+    background: linear-gradient(90deg, var(--rainbow-colors));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.nyan-wrapper.moving .rainbow-trail {
+    opacity: 0.8;
+    animation: rainbow-pulse 1s ease-out;
+}
+
+@keyframes rainbow-pulse {
+    0% { transform: translateY(-50%) scaleY(1); }
+    50% { transform: translateY(-50%) scaleY(1.5); }
+    100% { transform: translateY(-50%) scaleY(1); }
+}
+
+.nyan-cat {
+    width: 60px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.nyan-red {
+    background-color: var(--accent-red);
+    border-radius: 10px;
+}
+
+.nyan-blue {
+    background-color: var(--accent-blue);
+    border-radius: 10px;
+}
+
+.crown {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    display: none;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.crown.active {
+    display: block;
+}
+
+.crown::before {
+    content: '👑';
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+#mute-toggle {
+    background: var(--bg-light);
+    border: 2px solid var(--track-border);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+#mute-toggle:hover {
+    transform: scale(1.1);
+}
+
+#mute-toggle:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+#mute-toggle.muted .mute-icon::before {
+    content: '🔇';
+}
+
+.update-status {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--bg-light);
+    border-top: 2px solid var(--track-border);
+    font-size: 0.875rem;
+}
+
+footer a {
+    color: var(--accent-blue);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    margin: 0.25rem 0;
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--accent-red);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+@keyframes rainbow-shift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .nyan-wrapper {
+        transition: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .race-track {
+        gap: 2rem;
+    }
+    
+    .lane {
+        padding: 1rem;
+    }
+    
+    .track-line {
+        height: 60px;
+    }
+    
+    .nyan-wrapper {
+        width: 50px;
+        height: 60px;
+    }
+    
+    .nyan-cat {
+        width: 50px;
+        height: 30px;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-dark: #f8f9fa;
+        --bg-light: #ffffff;
+        --text-primary: #212529;
+        --text-secondary: #6c757d;
+        --track-bg: #e9ecef;
+        --track-border: #dee2e6;
+    }
+}

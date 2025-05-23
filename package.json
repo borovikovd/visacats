@@ -1,0 +1,30 @@
+{
+  "name": "nyan-migrants",
+  "version": "1.0.0",
+  "description": "Real-time UK Parliament petition race with Nyan Cats",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest",
+    "audit": "lighthouse https://denis.github.io/nyan-migrants/ --output=json --output-path=./lighthouse-report.json",
+    "serve": "python -m http.server 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denis/nyan-migrants.git"
+  },
+  "keywords": [
+    "nyan-cat",
+    "petition",
+    "uk-parliament",
+    "visualization",
+    "real-time"
+  ],
+  "author": "Denis",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "lighthouse": "^11.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-airbnb-base": "^15.0.0"
+  }
+}

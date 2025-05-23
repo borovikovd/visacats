@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyan-Cat Petition Race</title>
+    <meta name="description" content="Watch two UK parliament petitions race in real-time with Nyan Cats!">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+    <header>
+        <h1>🌈 Nyan-Cat Petition Race 🌈</h1>
+        <p class="subtitle">Watch UK Parliament petitions battle it out in real-time!</p>
+    </header>
+
+    <main id="race-container">
+        <div class="race-track">
+            <div class="lane" id="lane-anti">
+                <div class="petition-info">
+                    <a href="https://petition.parliament.uk/petitions/700824" 
+                       target="_blank" 
+                       rel="noopener"
+                       class="petition-link wobble-hover"
+                       aria-label="Anti-immigration petition: Close the borders! Suspend ALL immigration for 5 years!">
+                        "Close the borders! Suspend ALL immigration for 5 years!"
+                    </a>
+                    <div class="signature-count" id="count-anti" aria-live="polite">
+                        <span class="count-number">0</span> signatures
+                    </div>
+                </div>
+                <div class="track-line"></div>
+                <div class="nyan-wrapper" id="nyan-anti">
+                    <div class="rainbow-trail"></div>
+                    <div class="nyan-cat nyan-red"></div>
+                    <div class="crown" id="crown-anti" aria-label="Currently leading"></div>
+                </div>
+            </div>
+
+            <div class="lane" id="lane-pro">
+                <div class="petition-info">
+                    <a href="https://petition.parliament.uk/petitions/727360" 
+                       target="_blank" 
+                       rel="noopener"
+                       class="petition-link wobble-hover"
+                       aria-label="Pro-immigration petition: Keep the 5-Year ILR pathway for existing Skilled Worker visa holders">
+                        "Keep the 5-Year ILR pathway for existing Skilled Worker visa holders"
+                    </a>
+                    <div class="signature-count" id="count-pro" aria-live="polite">
+                        <span class="count-number">0</span> signatures
+                    </div>
+                </div>
+                <div class="track-line"></div>
+                <div class="nyan-wrapper" id="nyan-pro">
+                    <div class="rainbow-trail"></div>
+                    <div class="nyan-cat nyan-blue"></div>
+                    <div class="crown" id="crown-pro" aria-label="Currently leading"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="mute-toggle" aria-label="Toggle sound">
+                <span class="mute-icon">🔊</span>
+            </button>
+            <div class="update-status" id="update-status" aria-live="polite"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Data updates every 15 seconds from <a href="https://petition.parliament.uk" target="_blank" rel="noopener">UK Parliament Petitions</a></p>
+        <p><a href="https://github.com/denis/nyan-migrants" target="_blank" rel="noopener">View on GitHub</a></p>
+    </footer>
+
+    <div id="error-toast" class="toast" role="alert" aria-live="assertive"></div>
+
+    <audio id="bgm" loop preload="auto">
+        <source src="assets/nyan-bgm.mp3" type="audio/mpeg">
+        <source src="assets/nyan-bgm.ogg" type="audio/ogg">
+    </audio>
+
+    <script src="main.js"></script>
+</body>
+</html>
