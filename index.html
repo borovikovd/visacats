@@ -3,15 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nyan-Cat Petition Race</title>
-    <meta name="description" content="Watch two UK parliament petitions race in real-time with Nyan Cats!">
+    <title>UK Immigration Petition Race | Real-time Parliament Petition Tracker</title>
+    <meta name="description" content="Watch UK Parliament immigration petitions race in real-time with Nyan Cats! Live tracking of petition signatures with music and animations.">
+    <meta name="keywords" content="UK Parliament, petitions, immigration, real-time, tracker, Nyan Cat">
+    <meta name="author" content="UK Immigration Petition Race">
+    <meta name="theme-color" content="#0a0a0a">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="UK Immigration Petition Race">
+    <meta property="og:description" content="Watch UK Parliament immigration petitions race in real-time with Nyan Cats!">
+    <meta property="og:url" content="https://yoursite.github.io/nyan-migrants">
+    <meta property="og:image" content="https://yoursite.github.io/nyan-migrants/assets/nyan.webp">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="UK Immigration Petition Race">
+    <meta name="twitter:description" content="Watch UK Parliament immigration petitions race in real-time with Nyan Cats!">
+    <meta name="twitter:image" content="https://yoursite.github.io/nyan-migrants/assets/nyan.webp">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="preconnect" href="https://petition.parliament.uk">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip to main content for screen readers -->
+    <a href="#race-container" class="skip-link">Skip to main content</a>
+    
     <header>
-        <h1>🌈 Nyan-Cat Petition Race 🌈</h1>
-        <p class="subtitle">Watch UK Parliament petitions battle it out in real-time!</p>
+        <h1>UK Immigration Petition Race</h1>
+        <p class="subtitle">SLAM THE DOOR! vs Errr... maybe keep it slightly ajar for PhDs?</p>
     </header>
 
     <main id="race-container">
@@ -30,9 +53,9 @@
                     </div>
                 </div>
                 <div class="track-line"></div>
-                <div class="nyan-wrapper" id="nyan-anti">
-                    <div class="rainbow-trail"></div>
-                    <div class="nyan-cat nyan-red"></div>
+                <div class="nyan-wrapper" id="nyan-anti" role="img" aria-label="Anti-immigration petition cat racer">
+                    <div class="rainbow-trail" aria-hidden="true"></div>
+                    <img src="assets/nyan.webp" alt="Anti-immigration Nyan Cat racing along track" class="nyan-cat red-tint">
                     <div class="crown" id="crown-anti" aria-label="Currently leading"></div>
                 </div>
             </div>
@@ -51,19 +74,19 @@
                     </div>
                 </div>
                 <div class="track-line"></div>
-                <div class="nyan-wrapper" id="nyan-pro">
-                    <div class="rainbow-trail"></div>
-                    <div class="nyan-cat nyan-blue"></div>
+                <div class="nyan-wrapper" id="nyan-pro" role="img" aria-label="Pro-immigration petition cat racer">
+                    <div class="rainbow-trail" aria-hidden="true"></div>
+                    <img src="assets/nyan.webp" alt="Pro-immigration Nyan Cat racing along track" class="nyan-cat blue-tint">
                     <div class="crown" id="crown-pro" aria-label="Currently leading"></div>
                 </div>
             </div>
         </div>
 
         <div class="controls">
-            <button id="mute-toggle" aria-label="Toggle sound">
-                <span class="mute-icon">🔊</span>
-            </button>
-            <div class="update-status" id="update-status" aria-live="polite"></div>
+            <div class="update-status" id="update-status" aria-live="polite" role="status"></div>
+            <div class="audio-status" id="audio-status" aria-live="polite">
+                <span class="audio-icon">🔊</span> Click anywhere to toggle music
+            </div>
         </div>
     </main>
 
@@ -73,11 +96,9 @@
     </footer>
 
     <div id="error-toast" class="toast" role="alert" aria-live="assertive"></div>
-
-    <audio id="bgm" loop preload="auto">
-        <source src="assets/nyan-bgm.mp3" type="audio/mpeg">
-        <source src="assets/nyan-bgm.ogg" type="audio/ogg">
-    </audio>
+    
+    <!-- Screen reader announcements -->
+    <div id="sr-announcements" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
     <script src="main.js"></script>
 </body>

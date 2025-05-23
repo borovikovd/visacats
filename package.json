@@ -1,7 +1,7 @@
 {
-  "name": "nyan-migrants",
+  "name": "uk-immigration-petition-race",
   "version": "1.0.0",
-  "description": "Real-time UK Parliament petition race with Nyan Cats",
+  "description": "UK Immigration Petition Race - Real-time Parliament petition tracker",
   "main": "index.html",
   "scripts": {
     "test": "jest",

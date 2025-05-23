@@ -1,6 +1,6 @@
-# 🌈 Nyan-Cat Petition Race
+# 🌈 UK Immigration Petition Race
 
-A humorous real-time visualization of UK Parliament petition signature counts, featuring racing Nyan Cats!
+A real-time visualization of competing UK Parliament immigration petition signatures, featuring racing Nyan Cats!
 
 ## Live Demo
 
@@ -28,9 +28,32 @@ Watch as Nyan Cats race across the screen based on live signature counts!
 
 - Pure HTML/CSS/JavaScript (no framework dependencies)
 - CSS Grid & Flexbox for responsive layout
-- Web Audio API for sound effects
+- Web Audio API for synthesized circus music
 - Fetch API for petition data
-- No build process required
+- No build process required - perfect for GitHub Pages
+
+## 🚀 GitHub Pages Deployment
+
+### Quick Deploy (Recommended)
+
+1. **Fork this repository** to your GitHub account
+2. **Go to repository Settings** → **Pages**
+3. **Set Source** to "Deploy from a branch"
+4. **Select branch** `main` and folder `/ (root)`
+5. **Click Save**
+6. **Visit** `https://yourusername.github.io/nyan-migrants`
+
+### Custom Domain (Optional)
+
+1. In your repository, create a file named `CNAME` in the root
+2. Add your domain: `your-domain.com`
+3. Configure your DNS to point to GitHub Pages:
+   - **A Records**: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - **CNAME Record**: `yourusername.github.io`
+
+### Automatic Deployment
+
+The site automatically deploys when you push to the `main` branch. No build process required!
 
 ## Installation
 
