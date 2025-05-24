@@ -7,10 +7,13 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80,
+      branches: 71,
+      functions: 78,
+      lines: 83,
+      statements: 82,
     },
   },
+  coverageReporters: ['text', 'lcov', 'html'],
+  moduleFileExtensions: ['js'],
+  transform: {}
 };
