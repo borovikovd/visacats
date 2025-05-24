@@ -113,16 +113,17 @@ body::before {
 }
 
 header {
-    text-align: center;
-    padding: 3rem 1rem 2rem;
+    padding: 2.5rem 1rem 2rem;
     position: relative;
     z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 h1 {
     font-family: 'Press Start 2P', 'Courier New', monospace;
-    font-size: clamp(1.25rem, 3.5vw, 2.5rem);
-    margin-bottom: 1.5rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.8rem);
+    margin: 0 0 1.5rem 0;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-primary);
@@ -131,6 +132,17 @@ h1 {
         0 0 20px var(--accent-blue),
         0 0 30px var(--accent-blue);
     animation: glow 2s ease-in-out infinite alternate;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    white-space: nowrap;
+}
+
+h1::after {
+    content: '🇬🇧';
+    font-size: 0.7em;
+    opacity: 0.8;
 }
 
 @keyframes glow {
@@ -150,18 +162,20 @@ h1 {
 
 .subtitle {
     color: var(--text-primary);
-    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-size: clamp(0.75rem, 1.8vw, 1.1rem);
     font-family: 'Courier New', monospace;
     letter-spacing: 0.05em;
     opacity: 0.9;
-    margin-bottom: 1rem;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    line-height: 1.4;
+    text-align: left;
+    margin-bottom: 2rem;
 }
 
 main {
     flex: 1;
-    padding: 2rem 1rem;
-    max-width: 1200px;
+    padding: 2.5rem 1rem;
+    max-width: 1100px;
     width: 100%;
     margin: 0 auto;
     position: relative;
@@ -171,8 +185,8 @@ main {
 .race-track {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .lane {
@@ -187,7 +201,10 @@ main {
 }
 
 .petition-info {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .petition-link {
@@ -433,11 +450,23 @@ main {
 }
 
 .controls {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
     margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    .controls {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 0.5rem;
+    }
 }
 
 .update-status {
@@ -545,7 +574,7 @@ footer p {
 
 @media (max-width: 768px) {
     .race-track {
-        gap: 2rem;
+        gap: 1.5rem;
     }
     
     .lane {
@@ -565,6 +594,33 @@ footer p {
         width: 50px;
         height: 30px;
     }
+}
+
+/* UK branding enhancements */
+footer {
+    position: relative;
+    padding: 2rem 1rem;
+    background: var(--bg-light);
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    border-top: var(--pixel-size) solid var(--track-border);
+    line-height: 1.6;
+}
+
+footer::before {
+    content: '🇬🇧';
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    font-size: 1.5rem;
+    opacity: 0.6;
+    animation: gentle-bounce 4s ease-in-out infinite;
+}
+
+@keyframes gentle-bounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
 }
 
 @media (prefers-color-scheme: light) {

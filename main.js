@@ -23,7 +23,7 @@ const CONFIG = {
     AUDIO: {
         SCHEDULE_AHEAD_TIME: 0.1,
         LOOKAHEAD_MS: 25,
-        MELODY_LOOP_TIME: 1600, // Perfect Nyan Cat tempo
+        MELODY_LOOP_TIME: 2000, // Stately imperial march tempo
         NOTE_DURATION: 0.15,    // Shorter, peppier notes
         VOLUME: 0.1,            // Slightly louder for comedy effect
         VOLUME_DIP: 0.25
@@ -33,63 +33,60 @@ const CONFIG = {
     RETRY_DELAY: 1000
 };
 
-// Proper Nyan Cat melody with correct notes and timing
+// Imperial British Empire themed melody with Nyan Cat energy
 const MELODY_PATTERNS = {
     main: [
-        // Authentic Nyan Cat melody - measure 1
-        { freq: 740, time: 0, dur: 0.2 },        // F#5 (beat 1)
-        { freq: 831, time: 0.2, dur: 0.2 },      // G#5 (beat 1.5)
-        { freq: 1109, time: 0.4, dur: 0.2 },     // C#6 (beat 2)
-        { freq: 1245, time: 0.6, dur: 0.2 },     // D#6 (beat 2.5)
-        { freq: 988, time: 0.8, dur: 0.2 },      // B5 (beat 3)
-        { freq: 1245, time: 1.0, dur: 0.2 },     // D#6 (beat 3.5)
-        { freq: 1109, time: 1.2, dur: 0.2 },     // C#6 (beat 4)
-        { freq: 988, time: 1.4, dur: 0.2 },      // B5 (beat 4.5)
+        // "Rule Britannia" inspired opening with Nyan bounce
+        { freq: 523, time: 0, dur: 0.3 },        // C5 (strong imperial start)
+        { freq: 659, time: 0.3, dur: 0.15 },     // E5 (rising majesty)
+        { freq: 784, time: 0.45, dur: 0.15 },    // G5 (triumphant)
+        { freq: 1047, time: 0.6, dur: 0.4 },     // C6 (imperial fanfare!)
+        { freq: 784, time: 1.0, dur: 0.2 },      // G5 (march-like)
+        { freq: 659, time: 1.2, dur: 0.2 },      // E5
+        { freq: 523, time: 1.4, dur: 0.2 },      // C5 (resolute ending)
     ],
     variation: [
-        // Nyan Cat measure 2 - different phrase ending
-        { freq: 740, time: 0, dur: 0.2 },        // F#5
-        { freq: 831, time: 0.2, dur: 0.2 },      // G#5
-        { freq: 1109, time: 0.4, dur: 0.2 },     // C#6
-        { freq: 1245, time: 0.6, dur: 0.2 },     // D#6
-        { freq: 988, time: 0.8, dur: 0.2 },      // B5
-        { freq: 1109, time: 1.0, dur: 0.2 },     // C#6 (different!)
-        { freq: 831, time: 1.2, dur: 0.2 },      // G#5 (stepwise down)
-        { freq: 740, time: 1.4, dur: 0.2 },      // F#5 (resolve to tonic)
+        // "God Save the Queen" motif with playful twist
+        { freq: 784, time: 0, dur: 0.3 },        // G5 (stately)
+        { freq: 784, time: 0.3, dur: 0.3 },      // G5 (repeat - ceremonial)
+        { freq: 880, time: 0.6, dur: 0.3 },      // A5
+        { freq: 784, time: 0.9, dur: 0.2 },      // G5
+        { freq: 698, time: 1.1, dur: 0.2 },      // F5
+        { freq: 659, time: 1.3, dur: 0.3 },      // E5 (resolution)
     ],
     bridge: [
-        // Musical bridge - creates contrast and builds energy
-        { freq: 1480, time: 0, dur: 0.15 },      // F#6 (octave up - excitement!)
-        { freq: 1245, time: 0.15, dur: 0.15 },   // D#6 (down)
-        { freq: 1109, time: 0.3, dur: 0.15 },    // C#6 (down)
-        { freq: 988, time: 0.45, dur: 0.15 },    // B5 (down)
-        { freq: 831, time: 0.6, dur: 0.2 },      // G#5 (settle)
-        { freq: 1109, time: 0.8, dur: 0.2 },     // C#6 (back up)
-        { freq: 988, time: 1.0, dur: 0.3 },      // B5 (hold)
-        { freq: 740, time: 1.3, dur: 0.3 },      // F#5 (resolution)
+        // Majestic imperial march bridge
+        { freq: 1047, time: 0, dur: 0.2 },       // C6 (fanfare)
+        { freq: 1175, time: 0.2, dur: 0.2 },     // D6 
+        { freq: 1319, time: 0.4, dur: 0.4 },     // E6 (triumphant peak)
+        { freq: 1175, time: 0.8, dur: 0.2 },     // D6
+        { freq: 1047, time: 1.0, dur: 0.2 },     // C6
+        { freq: 880, time: 1.2, dur: 0.2 },      // A5
+        { freq: 784, time: 1.4, dur: 0.2 },      // G5 (march ending)
     ],
     harmony: [
-        // Proper chord progression in F# Major (I-vi-IV-V)
-        { freq: 466, time: 0, dur: 0.4 },       // A#4 (3rd of F# Major)
-        { freq: 554, time: 0.4, dur: 0.4 },     // C#5 (3rd of A# minor) 
-        { freq: 622, time: 0.8, dur: 0.4 },     // D#5 (3rd of B Major)
-        { freq: 554, time: 1.2, dur: 0.4 },     // C#5 (3rd of G# Major - dominant)
+        // Imperial C Major progression (I-IV-V-I) - strong and regal
+        { freq: 330, time: 0, dur: 0.5 },       // E4 (3rd of C Major)
+        { freq: 349, time: 0.5, dur: 0.5 },     // F4 (root of F Major)
+        { freq: 392, time: 1.0, dur: 0.5 },     // G4 (root of G Major - dominant)
+        { freq: 330, time: 1.5, dur: 0.5 },     // E4 (return to tonic)
     ],
     bass: [
-        // Strong bass foundation following chord changes
-        { freq: 185, time: 0, dur: 0.4 },       // F#3 (I - tonic)
-        { freq: 220, time: 0.4, dur: 0.4 },     // A3 (vi - relative minor)
-        { freq: 247, time: 0.8, dur: 0.4 },     // B3 (IV - subdominant)
-        { freq: 208, time: 1.2, dur: 0.4 },     // G#3 (V - dominant)
+        // Powerful imperial bass line - ceremonial march feel
+        { freq: 131, time: 0, dur: 0.5 },       // C3 (I - strong tonic)
+        { freq: 175, time: 0.5, dur: 0.5 },     // F3 (IV - subdominant)
+        { freq: 196, time: 1.0, dur: 0.5 },     // G3 (V - dominant power)
+        { freq: 131, time: 1.5, dur: 0.5 },     // C3 (I - imperial resolution)
     ]
 };
 
-// Proper 4/4 "oom-pah-oom-pah" rhythm
+// Imperial march rhythm - more ceremonial
 const RHYTHM_CLICKS = [
-    { time: 0, vol: 0.1 },       // OOM (beat 1 - strongest)
-    { time: 0.5, vol: 0.05 },    // pah (beat 2 - weak)
-    { time: 1.0, vol: 0.08 },    // OOM (beat 3 - strong)
-    { time: 1.5, vol: 0.05 },    // pah (beat 4 - weak)
+    { time: 0, vol: 0.12 },      // BOOM (beat 1 - imperial strong)
+    { time: 0.5, vol: 0.06 },    // tap (beat 2)
+    { time: 1.0, vol: 0.10 },    // BOOM (beat 3 - march)
+    { time: 1.5, vol: 0.06 },    // tap (beat 4)
+    { time: 1.75, vol: 0.04 },   // grace note (military flair)
 ];
 
 // Application state
