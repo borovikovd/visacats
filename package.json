@@ -7,12 +7,12 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "audit": "lighthouse https://denis.github.io/nyan-migrants/ --output=json --output-path=./lighthouse-report.json",
+    "audit": "lighthouse https://borovikovd.github.io/visacats/ --output=json --output-path=./lighthouse-report.json",
     "serve": "python -m http.server 8000"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/denis/nyan-migrants.git"
+    "url": "git+https://github.com/borovikovd/visacats.git"
   },
   "keywords": [
     "nyan-cat",

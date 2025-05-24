@@ -4,7 +4,7 @@ A real-time visualization of competing UK Parliament immigration petition signat
 
 ## Live Demo
 
-[https://denis.github.io/nyan-migrants/](https://denis.github.io/nyan-migrants/)
+[https://borovikovd.github.io/visacats/](https://borovikovd.github.io/visacats/)
 
 ## Overview
 
@@ -41,7 +41,7 @@ Watch as Nyan Cats race across the screen based on live signature counts!
 3. **Set Source** to "Deploy from a branch"
 4. **Select branch** `main` and folder `/ (root)`
 5. **Click Save**
-6. **Visit** `https://yourusername.github.io/nyan-migrants`
+6. **Visit** `https://yourusername.github.io/visacats`
 
 ### Custom Domain (Optional)
 
@@ -59,8 +59,8 @@ The site automatically deploys when you push to the `main` branch. No build proc
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/denis/nyan-migrants.git
-cd nyan-migrants
+git clone https://github.com/borovikovd/visacats.git
+cd visacats
 ```
 
 2. Open `index.html` in a web browser or serve with any static file server:
@@ -74,7 +74,7 @@ npx serve
 
 ### Project Structure
 ```
-nyan-migrants/
+visacats/
 ├── index.html          # Main HTML file
 ├── style.css           # Styles and animations
 ├── main.js             # Core JavaScript logic
