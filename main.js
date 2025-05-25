@@ -152,17 +152,25 @@ class PetitionRaceApp {
     async fetchWithRetry(url, attempts = CONFIG.RETRY_ATTEMPTS) {
         for (let i = 0; i < attempts; i++) {
             try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-                
-                const response = await fetch(url, {
-                    signal: controller.signal,
+                let fetchOptions = {
                     headers: {
                         'Accept': 'application/json'
                     }
-                });
+                };
                 
-                clearTimeout(timeoutId);
+                // Check if AbortController is supported
+                let controller, timeoutId;
+                if (typeof AbortController !== 'undefined') {
+                    controller = new AbortController();
+                    timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+                    fetchOptions.signal = controller.signal;
+                }
+                
+                const response = await fetch(url, fetchOptions);
+                
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
                 
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -384,9 +392,19 @@ class PetitionRaceApp {
         if (this.isAudioInitialized) return;
         
         try {
-            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            // Check for AudioContext support with all vendor prefixes
+            const AudioContextClass = window.AudioContext || 
+                                    window.webkitAudioContext || 
+                                    window.mozAudioContext || 
+                                    window.msAudioContext;
             
-            // Resume if suspended
+            if (!AudioContextClass) {
+                throw new Error('Web Audio API not supported');
+            }
+            
+            this.audioContext = new AudioContextClass();
+            
+            // Resume if suspended (for autoplay policy)
             if (this.audioContext.state === 'suspended') {
                 await this.audioContext.resume();
             }
@@ -821,8 +839,37 @@ if (document.readyState === 'loading') {
     app.init();
 }
 
+// Polyfill for requestAnimationFrame (for older browsers)
+(function() {
+    let lastTime = 0;
+    const vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || 
+                                     window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+ 
+    if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = function(callback) {
+            const currTime = new Date().getTime();
+            const timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            const id = window.setTimeout(function() { 
+                callback(currTime + timeToCall); 
+            }, timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+    }
+ 
+    if (!window.cancelAnimationFrame) {
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+    }
+}());
+
 // Check for reduced motion preference
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.style.setProperty('--animation-duration', '0.01ms');
 }
 
