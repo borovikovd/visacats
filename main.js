@@ -231,12 +231,14 @@ class PetitionRaceApp {
             nyanWrapper.classList.add('moving');
             this.duckAudioVolume();
             
-            // Add a little hop animation
+            // Add a little hop animation (use will-change for better mobile performance)
+            nyanWrapper.style.willChange = 'transform';
             nyanWrapper.style.transform = `translateY(-50%) scaleY(1.1)`;
             
             setTimeout(() => {
                 nyanWrapper.classList.remove('moving');
                 nyanWrapper.style.transform = `translateY(-50%)`;
+                nyanWrapper.style.willChange = 'auto';
                 // Return to calculated position after animation
                 nyanWrapper.style.left = `${basePosition}%`;
             }, CONFIG.ANIMATION_DURATION);
@@ -261,41 +263,46 @@ class PetitionRaceApp {
                 // Calculate the increase
                 const increase = count - oldCount;
                 
-                // Add animation class
-                countElement.style.animation = 'counter-pulse 0.6s ease-out';
+                // Check if device prefers reduced motion
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 
-                // Flash with color based on petition type
-                const flashColor = petitionConfig.name === 'anti-immigration' ? 
-                    'var(--accent-red)' : 'var(--accent-blue)';
-                
-                countElement.style.color = flashColor;
-                countElement.style.textShadow = `0 0 20px ${flashColor}, 0 0 40px ${flashColor}`;
-                
-                // Add floating number effect
-                const changeIndicator = document.createElement('span');
-                changeIndicator.className = 'count-change';
-                changeIndicator.textContent = `+${increase.toLocaleString()}`;
-                changeIndicator.style.cssText = `
-                    position: absolute;
-                    top: -10px;
-                    right: -40px;
-                    font-size: 0.8em;
-                    color: var(--rainbow-4);
-                    font-weight: bold;
-                    animation: float-up 1s ease-out;
-                    pointer-events: none;
-                    text-shadow: 0 0 10px currentColor;
-                `;
-                countElement.parentElement.style.position = 'relative';
-                countElement.parentElement.appendChild(changeIndicator);
-                
-                // Remove elements after animation
-                setTimeout(() => {
-                    countElement.style.animation = '';
-                    countElement.style.color = '';
-                    countElement.style.textShadow = '0 0 5px currentColor';
-                    changeIndicator.remove();
-                }, 1000);
+                if (!prefersReducedMotion) {
+                    // Add animation class
+                    countElement.style.animation = 'counter-pulse 0.6s ease-out';
+                    
+                    // Flash with color based on petition type
+                    const flashColor = petitionConfig.name === 'anti-immigration' ? 
+                        'var(--accent-red)' : 'var(--accent-blue)';
+                    
+                    countElement.style.color = flashColor;
+                    countElement.style.textShadow = `0 0 20px ${flashColor}, 0 0 40px ${flashColor}`;
+                    
+                    // Add floating number effect
+                    const changeIndicator = document.createElement('span');
+                    changeIndicator.className = 'count-change';
+                    changeIndicator.textContent = `+${increase.toLocaleString()}`;
+                    changeIndicator.style.cssText = `
+                        position: absolute;
+                        top: -10px;
+                        right: -40px;
+                        font-size: 0.8em;
+                        color: var(--rainbow-4);
+                        font-weight: bold;
+                        animation: float-up 1s ease-out;
+                        pointer-events: none;
+                        text-shadow: 0 0 10px currentColor;
+                    `;
+                    countElement.parentElement.style.position = 'relative';
+                    countElement.parentElement.appendChild(changeIndicator);
+                    
+                    // Remove elements after animation
+                    setTimeout(() => {
+                        countElement.style.animation = '';
+                        countElement.style.color = '';
+                        countElement.style.textShadow = '0 0 5px currentColor';
+                        changeIndicator.remove();
+                    }, 1000);
+                }
             }
             countElement.textContent = formattedCount;
         }
@@ -700,14 +707,19 @@ class PetitionRaceApp {
     }
 
     setupEventListeners() {
-        // Click anywhere to toggle audio
-        document.addEventListener('click', async (e) => {
+        // Handle both click and touch events for better mobile support
+        const handleInteraction = async (e) => {
             // Ignore clicks on links
             if (e.target.tagName === 'A' || e.target.closest('a')) {
                 return;
             }
             
-            // Initialize audio on first click
+            // Prevent double-firing on touch devices
+            if (e.type === 'touchend') {
+                e.preventDefault();
+            }
+            
+            // Initialize audio on first interaction
             if (!this.isAudioInitialized) {
                 this.isMuted = false; // Start unmuted on first click
                 await this.initAudio();
@@ -718,7 +730,11 @@ class PetitionRaceApp {
                 // Toggle mute state on subsequent clicks
                 this.toggleMute();
             }
-        });
+        };
+
+        // Add both click and touch support
+        document.addEventListener('click', handleInteraction);
+        document.addEventListener('touchend', handleInteraction, { passive: false });
 
         // Visibility change
         document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
@@ -735,6 +751,17 @@ class PetitionRaceApp {
 
         // Cleanup on unload
         window.addEventListener('beforeunload', () => this.cleanup());
+        
+        // Handle orientation changes
+        window.addEventListener('orientationchange', () => {
+            // Force layout recalculation after orientation change
+            setTimeout(() => {
+                document.querySelectorAll('.nyan-wrapper').forEach(wrapper => {
+                    const currentLeft = wrapper.style.left;
+                    wrapper.style.left = currentLeft;
+                });
+            }, 100);
+        });
     }
 
     cleanup() {

@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+/* Prevent horizontal scroll on mobile */
+html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
 /* Accessibility */
 .skip-link {
     position: absolute;
@@ -84,6 +91,7 @@ body {
     background: var(--bg-dark);
     color: var(--text-primary);
     min-height: 100vh;
+    min-height: -webkit-fill-available; /* Better mobile viewport handling */
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
@@ -91,6 +99,8 @@ body {
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
     position: relative;
+    width: 100%;
+    margin: 0;
 }
 
 body::before {
@@ -113,19 +123,20 @@ body::before {
 }
 
 header {
-    padding: 2.5rem 1rem 2rem;
+    padding: 2rem 1rem 1.5rem;
     position: relative;
     z-index: 2;
     max-width: 1100px;
     margin: 0 auto;
+    width: 100%;
 }
 
 h1 {
     font-family: 'Press Start 2P', 'Courier New', monospace;
-    font-size: clamp(0.9rem, 2.5vw, 1.8rem);
-    margin: 0 0 1.5rem 0;
+    font-size: clamp(0.75rem, 3vw, 1.8rem);
+    margin: 0 0 1rem 0;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: var(--text-primary);
     text-shadow: 
         0 0 10px var(--accent-blue),
@@ -135,8 +146,9 @@ h1 {
     text-align: left;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    white-space: nowrap;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    line-height: 1.4;
 }
 
 h1::after {
@@ -162,19 +174,21 @@ h1::after {
 
 .subtitle {
     color: var(--text-primary);
-    font-size: clamp(0.75rem, 1.8vw, 1.1rem);
+    font-size: clamp(0.7rem, 2vw, 1.1rem);
     font-family: 'Courier New', monospace;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
     opacity: 0.9;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-    line-height: 1.4;
+    line-height: 1.5;
     text-align: left;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 main {
     flex: 1;
-    padding: 2.5rem 1rem;
+    padding: 1.5rem 1rem;
     max-width: 1100px;
     width: 100%;
     margin: 0 auto;
@@ -209,13 +223,15 @@ main {
 
 .petition-link {
     display: inline-block;
-    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    font-size: clamp(0.8rem, 2.5vw, 1.125rem);
     color: var(--text-primary);
     text-decoration: none;
     margin-bottom: 0.75rem;
     transition: all 0.2s ease;
     font-family: 'Courier New', monospace;
-    line-height: 1.4;
+    line-height: 1.5;
+    word-break: break-word;
+    hyphens: manual;
 }
 
 .petition-link:hover {
@@ -225,10 +241,14 @@ main {
 }
 
 .signature-count {
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 2vw, 1rem);
     color: var(--text-primary);
     font-family: 'Courier New', monospace;
     font-weight: bold;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: baseline;
 }
 
 .count-number {
@@ -319,8 +339,8 @@ main {
     top: 50%;
     left: 70%; /* Start at 70% of track */
     transform: translateY(-50%);
-    width: 80px;
-    height: 50px;
+    width: clamp(50px, 10vw, 80px);
+    height: clamp(30px, 6vw, 50px);
     transition: left 1s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: left;
     z-index: 10;
@@ -399,8 +419,8 @@ main {
 }
 
 .nyan-cat {
-    width: 80px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -470,17 +490,19 @@ main {
 }
 
 .update-status {
-    font-size: 0.625rem;
+    font-size: clamp(0.625rem, 1.5vw, 0.75rem);
     color: var(--text-secondary);
     font-family: 'Courier New', monospace;
     opacity: 0.6;
+    text-align: center;
 }
 
 .audio-status {
-    font-size: 0.625rem;
+    font-size: clamp(0.625rem, 1.5vw, 0.75rem);
     color: var(--text-secondary);
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
     border: var(--pixel-size) solid var(--track-border);
@@ -489,6 +511,8 @@ main {
     font-family: 'Courier New', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    white-space: nowrap;
+    max-width: 100%;
 }
 
 .audio-status .audio-icon {
@@ -572,27 +596,261 @@ footer p {
     }
 }
 
+/* Mobile optimizations */
 @media (max-width: 768px) {
+    header {
+        padding: 1.5rem 0.75rem 1rem;
+    }
+    
+    h1 {
+        font-size: clamp(0.65rem, 4vw, 1.2rem);
+        margin-bottom: 0.75rem;
+    }
+    
+    h1::after {
+        font-size: 0.8em;
+    }
+    
+    .subtitle {
+        font-size: clamp(0.625rem, 2.5vw, 0.875rem);
+        margin-bottom: 1rem;
+    }
+    
+    main {
+        padding: 1rem 0.75rem;
+    }
+    
     .race-track {
-        gap: 1.5rem;
+        gap: 1.25rem;
     }
     
     .lane {
-        padding: 1rem;
+        padding: 0.875rem;
+        border-width: 2px;
+    }
+    
+    .petition-info {
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .petition-link {
+        font-size: clamp(0.7rem, 3vw, 0.9rem);
+        margin-bottom: 0.5rem;
+        padding: 0.25rem 0;
+        /* Make touch target larger */
+        position: relative;
+        padding-right: 1rem;
+    }
+    
+    .petition-link::after {
+        content: '';
+        position: absolute;
+        inset: -0.5rem;
+    }
+    
+    .signature-count {
+        font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+    }
+    
+    .count-number {
+        font-size: 1.15em;
     }
     
     .track-line {
-        height: 60px;
+        height: 50px;
+        margin: 0.5rem 0;
     }
     
     .nyan-wrapper {
-        width: 50px;
-        height: 60px;
+        width: clamp(45px, 12vw, 60px);
+        height: clamp(28px, 8vw, 40px);
     }
     
-    .nyan-cat {
-        width: 50px;
-        height: 30px;
+    .rainbow-trail {
+        height: 18px;
+    }
+    
+    .nyan-wrapper.moving .rainbow-trail {
+        width: 100px;
+    }
+    
+    .crown {
+        top: -20px;
+        font-size: 0.875rem;
+    }
+    
+    .controls {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+    
+    .audio-status {
+        padding: 0.625rem 0.875rem;
+        font-size: clamp(0.625rem, 2vw, 0.7rem);
+        /* Larger touch target */
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    footer {
+        padding: 1.5rem 0.75rem;
+        font-size: clamp(0.625rem, 2vw, 0.75rem);
+    }
+    
+    footer::before {
+        right: 1rem;
+        font-size: 1.25rem;
+    }
+    
+    .toast {
+        font-size: 0.7rem;
+        padding: 0.625rem 1rem;
+        bottom: 1.5rem;
+        max-width: 90%;
+        border-width: 2px;
+    }
+}
+
+/* Very small mobile devices */
+@media (max-width: 375px) {
+    h1 {
+        font-size: 0.625rem;
+        gap: 0.25rem;
+    }
+    
+    .subtitle {
+        font-size: 0.6rem;
+    }
+    
+    .petition-link {
+        font-size: 0.65rem;
+    }
+    
+    .signature-count {
+        font-size: 0.7rem;
+    }
+    
+    .track-line {
+        height: 40px;
+    }
+    
+    .nyan-wrapper {
+        width: 40px;
+        height: 25px;
+    }
+    
+    .controls {
+        gap: 0.5rem;
+    }
+    
+    .audio-status {
+        font-size: 0.6rem;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    header {
+        padding: 1rem 0.75rem 0.75rem;
+    }
+    
+    h1 {
+        font-size: clamp(0.6rem, 3vw, 1rem);
+        margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+        margin-bottom: 0.75rem;
+    }
+    
+    main {
+        padding: 0.75rem;
+    }
+    
+    .race-track {
+        gap: 1rem;
+    }
+    
+    .lane {
+        padding: 0.75rem;
+    }
+    
+    .track-line {
+        height: 40px;
+    }
+    
+    .controls {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    footer {
+        padding: 1rem 0.75rem;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Increase tap targets */
+    .petition-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .audio-status {
+        min-height: 48px;
+        cursor: pointer;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .petition-link:hover {
+        transform: none;
+    }
+    
+    /* Add active states for better feedback */
+    .petition-link:active {
+        color: var(--accent-blue);
+        transform: scale(0.98);
+    }
+    
+    .audio-status:active {
+        transform: scale(0.98);
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Ensure pixel-perfect rendering */
+    .nyan-cat,
+    .crown,
+    .rainbow-trail {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Safe area insets for modern phones */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+    
+    header,
+    main,
+    footer {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+    }
+    
+    .toast {
+        bottom: max(2rem, env(safe-area-inset-bottom));
     }
 }
 
