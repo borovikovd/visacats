@@ -158,7 +158,7 @@ header {
 
 h1 {
     font-family: 'Press Start 2P', 'Courier New', monospace;
-    font-size: clamp(0.35rem, 2.5vw, 1.8rem);
+    font-size: clamp(0.6rem, 4vw, 1.8rem);
     margin: 0 0 1rem 0;
     text-transform: uppercase;
     letter-spacing: 0.01em;
@@ -759,10 +759,10 @@ footer p {
     }
     
     h1 {
-        font-size: clamp(0.4rem, 3vw, 0.9rem);
+        font-size: clamp(0.55rem, 4.5vw, 1.2rem);
         margin-bottom: 0.75rem;
         /* Reduce letter spacing on mobile to fit better */
-        letter-spacing: -0.01em;
+        letter-spacing: 0;
     }
     
     .h1-text::after {
@@ -876,8 +876,8 @@ footer p {
 /* iPhone Pro Max and similar large phones */
 @media (max-width: 450px) {
     h1 {
-        font-size: 0.36rem;
-        letter-spacing: -0.025em;
+        font-size: clamp(0.65rem, 5vw, 1rem);
+        letter-spacing: 0.5px;
     }
     
     .h1-text::after {
@@ -892,8 +892,8 @@ footer p {
 /* iPhone and similar sized devices */
 @media (max-width: 430px) {
     h1 {
-        font-size: 0.34rem;
-        letter-spacing: -0.03em;
+        font-size: clamp(0.6rem, 5.5vw, 0.9rem);
+        letter-spacing: 0.3px;
     }
     
     .h1-text::after {
@@ -904,8 +904,8 @@ footer p {
 /* Very small mobile devices */
 @media (max-width: 375px) {
     h1 {
-        font-size: 0.32rem;
-        letter-spacing: -0.035em; /* More compression */
+        font-size: clamp(0.55rem, 6vw, 0.8rem);
+        letter-spacing: 0; /* Remove compression */
         /* Use transform to fit if needed */
         -webkit-transform-origin: left center;
         -moz-transform-origin: left center;
@@ -926,11 +926,11 @@ footer p {
     @media (max-width: 320px) {
         .h1-text {
             display: inline-block;
-            -webkit-transform: scale(0.9);
-            -moz-transform: scale(0.9);
-            -ms-transform: scale(0.9);
-            -o-transform: scale(0.9);
-            transform: scale(0.9);
+            -webkit-transform: scale(0.95);
+            -moz-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            -o-transform: scale(0.95);
+            transform: scale(0.95);
             -webkit-transform-origin: left center;
             -moz-transform-origin: left center;
             -ms-transform-origin: left center;
