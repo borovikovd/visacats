@@ -183,12 +183,14 @@ h1 {
 /* Flag always attached to text */
 .h1-text::after {
     content: '\00A0🇬🇧'; /* Non-breaking space before flag */
-    font-size: 0.7em;
-    opacity: 0.8;
-    display: inline;
+    font-size: 1.4em; /* Larger to match uppercase letter height */
+    opacity: 0.9;
+    display: inline-block;
     white-space: nowrap;
     position: relative;
-    top: -0.1em;
+    top: -0.05em; /* Move up to align with text baseline */
+    vertical-align: baseline;
+    line-height: 0;
 }
 
 @-webkit-keyframes glow {
@@ -764,7 +766,7 @@ footer p {
     }
     
     .h1-text::after {
-        font-size: 0.8em;
+        font-size: 1.4em; /* Match uppercase height on mobile */
     }
     
     .subtitle {
@@ -889,7 +891,7 @@ footer p {
     }
     
     .h1-text::after {
-        font-size: 0.75em;
+        font-size: 1.4em; /* Match uppercase height on small devices */
     }
     
     /* Scale down the entire h1 if viewport is too narrow */
