@@ -799,12 +799,3 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.style.setProperty('--animation-duration', '0.01ms');
 }
 
-// Export for testing
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        PetitionRaceApp,
-        CONFIG,
-        MELODY_PATTERNS,
-        RHYTHM_CLICKS
-    };
-}
