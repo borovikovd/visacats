@@ -158,10 +158,10 @@ header {
 
 h1 {
     font-family: 'Press Start 2P', 'Courier New', monospace;
-    font-size: clamp(0.5rem, 2.5vw, 1.8rem);
+    font-size: clamp(0.35rem, 2.5vw, 1.8rem);
     margin: 0 0 1rem 0;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     color: var(--text-primary);
     text-shadow: 
         0 0 10px var(--accent-blue),
@@ -759,10 +759,10 @@ footer p {
     }
     
     h1 {
-        font-size: clamp(0.45rem, 3.5vw, 1rem);
+        font-size: clamp(0.4rem, 3vw, 0.9rem);
         margin-bottom: 0.75rem;
         /* Reduce letter spacing on mobile to fit better */
-        letter-spacing: 0;
+        letter-spacing: -0.01em;
     }
     
     .h1-text::after {
@@ -873,23 +873,39 @@ footer p {
     }
 }
 
-/* iPhone and similar sized devices */
-@media (max-width: 430px) {
+/* iPhone Pro Max and similar large phones */
+@media (max-width: 450px) {
     h1 {
-        font-size: 0.42rem;
-        letter-spacing: -0.01em;
+        font-size: 0.36rem;
+        letter-spacing: -0.025em;
     }
     
     .h1-text::after {
-        font-size: 1.3em; /* Slightly smaller flag */
+        font-size: 1.15em; /* Proportional flag */
+    }
+    
+    header {
+        padding: 1.25rem 0.4rem 0.75rem;
+    }
+}
+
+/* iPhone and similar sized devices */
+@media (max-width: 430px) {
+    h1 {
+        font-size: 0.34rem;
+        letter-spacing: -0.03em;
+    }
+    
+    .h1-text::after {
+        font-size: 1.1em; /* Smaller flag */
     }
 }
 
 /* Very small mobile devices */
 @media (max-width: 375px) {
     h1 {
-        font-size: 0.4rem;
-        letter-spacing: -0.02em; /* Negative spacing to compress text */
+        font-size: 0.32rem;
+        letter-spacing: -0.035em; /* More compression */
         /* Use transform to fit if needed */
         -webkit-transform-origin: left center;
         -moz-transform-origin: left center;
