@@ -173,6 +173,8 @@ h1 {
     text-align: left;
     display: block;
     line-height: 1.4;
+    position: relative;
+    padding-right: 2.5em; /* Space for flag */
 }
 
 .h1-text {
@@ -180,17 +182,17 @@ h1 {
     white-space: nowrap;
 }
 
-/* Flag always attached to text */
+/* Flag as separate element */
 .h1-text::after {
-    content: '\00A0🇬🇧'; /* Non-breaking space before flag */
-    font-size: 1.4em; /* Larger to match uppercase letter height */
+    content: '🇬🇧';
+    font-size: 1.6em; /* Larger to match uppercase letter height */
     opacity: 0.9;
-    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-65%); /* Adjust for uppercase text baseline */
     white-space: nowrap;
-    position: relative;
-    top: -0.05em; /* Move up to align with text baseline */
-    vertical-align: baseline;
-    line-height: 0;
+    line-height: 1;
 }
 
 @-webkit-keyframes glow {
@@ -775,10 +777,12 @@ footer p {
     h1 {
         font-size: clamp(0.7rem, 2.8vw, 1.2rem);
         letter-spacing: -0.01em;
+        padding-right: 2.2em; /* Space for flag */
     }
     
     .h1-text::after {
-        font-size: 1.3em; /* Slightly smaller flag */
+        font-size: 1.5em; /* Slightly smaller flag */
+        right: 0.5rem; /* Align with content padding */
     }
     
     .subtitle {
@@ -888,18 +892,18 @@ footer p {
 /* Small devices (phones) */
 @media (max-width: 480px) {
     h1 {
-        font-size: clamp(0.6rem, 3vw, 1rem);
-        letter-spacing: -0.02em;
-        padding-right: 0.5rem; /* Space for flag */
+        font-size: clamp(0.55rem, 2.8vw, 0.95rem);
+        letter-spacing: -0.025em;
+        padding-right: 2em; /* Space for flag */
     }
     
     .h1-text::after {
-        font-size: 1.15em; /* Smaller flag for phones */
+        font-size: 1.3em; /* Smaller flag for phones */
+        right: 0.75rem; /* Align with race track padding */
     }
     
     header {
-        padding: 1.25rem 0.5rem 0.75rem;
-        padding-right: 1rem; /* Extra padding for flag */
+        padding: 1.25rem 0.75rem 0.75rem;
     }
 }
 
