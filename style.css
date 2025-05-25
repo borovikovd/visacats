@@ -752,6 +752,20 @@ footer p {
     }
 }
 
+/* Extra large devices (desktops and up) */
+@media (max-width: 1280px) {
+    h1 {
+        font-size: clamp(0.9rem, 3.5vw, 1.6rem);
+    }
+}
+
+/* Large devices (tablets / small laptops) */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: clamp(0.8rem, 3vw, 1.4rem);
+    }
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
     header {
@@ -759,14 +773,12 @@ footer p {
     }
     
     h1 {
-        font-size: clamp(0.55rem, 4.5vw, 1.2rem);
-        margin-bottom: 0.75rem;
-        /* Reduce letter spacing on mobile to fit better */
-        letter-spacing: 0;
+        font-size: clamp(0.7rem, 2.8vw, 1.2rem);
+        letter-spacing: -0.01em;
     }
     
     .h1-text::after {
-        font-size: 1.4em; /* Match uppercase height on mobile */
+        font-size: 1.3em; /* Slightly smaller flag */
     }
     
     .subtitle {
@@ -873,112 +885,29 @@ footer p {
     }
 }
 
-/* iPhone Pro Max and similar large phones */
-@media (max-width: 450px) {
+/* Small devices (phones) */
+@media (max-width: 480px) {
     h1 {
-        font-size: clamp(0.65rem, 5vw, 1rem);
-        letter-spacing: 0.5px;
+        font-size: clamp(0.6rem, 3vw, 1rem);
+        letter-spacing: -0.02em;
+        padding-right: 0.5rem; /* Space for flag */
     }
     
     .h1-text::after {
-        font-size: 1.15em; /* Proportional flag */
+        font-size: 1.15em; /* Smaller flag for phones */
     }
     
     header {
-        padding: 1.25rem 0.4rem 0.75rem;
+        padding: 1.25rem 0.5rem 0.75rem;
+        padding-right: 1rem; /* Extra padding for flag */
     }
 }
 
-/* iPhone and similar sized devices */
-@media (max-width: 430px) {
-    h1 {
-        font-size: clamp(0.6rem, 5.5vw, 0.9rem);
-        letter-spacing: 0.3px;
-    }
-    
-    .h1-text::after {
-        font-size: 1.1em; /* Smaller flag */
-    }
-}
-
-/* Very small mobile devices */
-@media (max-width: 375px) {
-    h1 {
-        font-size: clamp(0.55rem, 6vw, 0.8rem);
-        letter-spacing: 0; /* Remove compression */
-        /* Use transform to fit if needed */
-        -webkit-transform-origin: left center;
-        -moz-transform-origin: left center;
-        -ms-transform-origin: left center;
-        -o-transform-origin: left center;
-        transform-origin: left center;
-    }
-    
-    .h1-text {
-        font-size: inherit;
-    }
-    
-    .h1-text::after {
-        font-size: 1.4em; /* Match uppercase height on small devices */
-    }
-    
-    /* Scale down the entire h1 if viewport is too narrow */
-    @media (max-width: 320px) {
-        .h1-text {
-            display: inline-block;
-            -webkit-transform: scale(0.95);
-            -moz-transform: scale(0.95);
-            -ms-transform: scale(0.95);
-            -o-transform: scale(0.95);
-            transform: scale(0.95);
-            -webkit-transform-origin: left center;
-            -moz-transform-origin: left center;
-            -ms-transform-origin: left center;
-            -o-transform-origin: left center;
-            transform-origin: left center;
-        }
-    }
-    
-    .subtitle {
-        font-size: 0.6rem;
-    }
-    
-    .petition-link {
-        font-size: 0.65rem;
-    }
-    
-    .signature-count {
-        font-size: 0.7rem;
-    }
-    
-    .track-line {
-        height: 40px;
-    }
-    
-    .nyan-wrapper {
-        width: 40px;
-        height: 25px;
-    }
-    
-    .controls {
-        gap: 0.5rem;
-    }
-    
-    .audio-status {
-        font-size: 0.6rem;
-        padding: 0.5rem 0.75rem;
-    }
-}
 
 /* Landscape mobile */
 @media (max-width: 768px) and (orientation: landscape) {
     header {
         padding: 1rem 0.75rem 0.75rem;
-    }
-    
-    h1 {
-        font-size: clamp(0.6rem, 3vw, 1rem);
-        margin-bottom: 0.5rem;
     }
     
     .subtitle {
